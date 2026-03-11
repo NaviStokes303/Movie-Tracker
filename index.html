@@ -4,14 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Tracker</title>
-
-    <!-- Google Fonts: Bebas Neue (display) + DM Sans (body) -->
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
-        /* ============================================
-           CSS VARIABLES & RESET
-        ============================================ */
         :root {
             --bg:       #0a0a0f;
             --surface:  #13131a;
@@ -35,9 +30,6 @@
             min-height: 100vh;
         }
 
-        /* ============================================
-           HEADER
-        ============================================ */
         header {
             background: var(--surface);
             border-bottom: 1px solid var(--border);
@@ -66,7 +58,6 @@
             gap: 12px;
         }
 
-        /* User selector in the header */
         #userSelect {
             background: var(--card);
             border: 1px solid var(--border);
@@ -78,18 +69,12 @@
             cursor: pointer;
         }
 
-        /* ============================================
-           MAIN LAYOUT
-        ============================================ */
         main {
             max-width: 1200px;
             margin: 0 auto;
             padding: 40px 20px;
         }
 
-        /* ============================================
-           TABS
-        ============================================ */
         .tabs {
             display: flex;
             gap: 4px;
@@ -124,15 +109,9 @@
             color: var(--text);
         }
 
-        /* ============================================
-           SECTION PANELS
-        ============================================ */
         .panel { display: none; }
         .panel.active { display: block; }
 
-        /* ============================================
-           SECTION HEADINGS
-        ============================================ */
         .section-title {
             font-family: 'Bebas Neue', sans-serif;
             font-size: 1.8rem;
@@ -147,9 +126,6 @@
             margin-bottom: 24px;
         }
 
-        /* ============================================
-           SEARCH BAR
-        ============================================ */
         .search-bar {
             display: flex;
             gap: 10px;
@@ -173,9 +149,6 @@
             border-color: var(--accent);
         }
 
-        /* ============================================
-           BUTTONS
-        ============================================ */
         .btn {
             background: var(--accent);
             color: #000;
@@ -192,9 +165,7 @@
         .btn:hover { opacity: 0.85; }
         .btn:active { transform: scale(0.98); }
 
-        .btn-red {
-            background: var(--accent2);
-        }
+        .btn-red { background: var(--accent2); }
 
         .btn-outline {
             background: none;
@@ -213,9 +184,6 @@
             color: var(--accent);
         }
 
-        /* ============================================
-           TABLE
-        ============================================ */
         .table-wrap {
             overflow-x: auto;
             border: 1px solid var(--border);
@@ -228,9 +196,7 @@
             font-size: 0.92rem;
         }
 
-        thead {
-            background: var(--surface);
-        }
+        thead { background: var(--surface); }
 
         th {
             text-align: left;
@@ -251,13 +217,8 @@
 
         tr:last-child td { border-bottom: none; }
 
-        tr:hover td {
-            background: rgba(255,255,255,0.02);
-        }
+        tr:hover td { background: rgba(255,255,255,0.02); }
 
-        /* ============================================
-           STATUS BADGES
-        ============================================ */
         .badge {
             display: inline-block;
             padding: 3px 10px;
@@ -266,19 +227,13 @@
             font-weight: 600;
         }
 
-        .badge-watched    { background: rgba(71,232,160,0.15); color: var(--green); }
-        .badge-watching   { background: rgba(71,155,232,0.15); color: var(--blue); }
-        .badge-plan       { background: rgba(232,197,71,0.15); color: var(--accent); }
+        .badge-watched  { background: rgba(71,232,160,0.15); color: var(--green); }
+        .badge-watching { background: rgba(71,155,232,0.15); color: var(--blue); }
+        .badge-plan     { background: rgba(232,197,71,0.15); color: var(--accent); }
 
-        /* ============================================
-           STAR RATING
-        ============================================ */
-        .stars { color: var(--accent); letter-spacing: 1px; font-size: 0.9rem; }
+        .stars       { color: var(--accent); letter-spacing: 1px; font-size: 0.9rem; }
         .stars-empty { color: var(--border); }
 
-        /* ============================================
-           FORM CARD
-        ============================================ */
         .form-card {
             background: var(--card);
             border: 1px solid var(--border);
@@ -338,9 +293,6 @@
 
         select option { background: var(--surface); }
 
-        /* ============================================
-           TOAST NOTIFICATIONS
-        ============================================ */
         #toast-container {
             position: fixed;
             bottom: 24px;
@@ -370,9 +322,6 @@
             to   { transform: translateX(0);    opacity: 1; }
         }
 
-        /* ============================================
-           LOADING SPINNER
-        ============================================ */
         .loading {
             text-align: center;
             padding: 40px;
@@ -393,9 +342,6 @@
 
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* ============================================
-           EMPTY STATE
-        ============================================ */
         .empty-state {
             text-align: center;
             padding: 50px;
@@ -404,9 +350,6 @@
 
         .empty-state .icon { font-size: 2.5rem; margin-bottom: 10px; }
 
-        /* ============================================
-           MODAL (for editing watchlist entry)
-        ============================================ */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -446,9 +389,6 @@
 </head>
 <body>
 
-<!-- ============================================
-     HEADER
-============================================ -->
 <header>
     <div class="logo">Movie<span>Track</span></div>
     <div class="header-right">
@@ -459,12 +399,8 @@
     </div>
 </header>
 
-<!-- ============================================
-     MAIN CONTENT
-============================================ -->
 <main>
 
-    <!-- Tab Navigation -->
     <div class="tabs">
         <button class="tab-btn active" onclick="showTab('movies')">🎬 Browse Movies</button>
         <button class="tab-btn" onclick="showTab('watchlist')">📋 My Watchlist</button>
@@ -472,19 +408,14 @@
         <button class="tab-btn" onclick="showTab('add-watchlist')">🔖 Add to Watchlist</button>
     </div>
 
-    <!-- ==================== TAB 1: Browse Movies ==================== -->
     <div id="tab-movies" class="panel active">
         <div class="section-title">All Movies</div>
         <div class="section-subtitle">Browse the full movie database. Use the search bar to filter by title.</div>
-
-        <!-- Search bar -->
         <div class="search-bar">
             <input type="text" id="searchInput" placeholder="Search by movie title..." />
             <button class="btn" onclick="searchMovies()">Search</button>
             <button class="btn-outline" onclick="loadAllMovies()">Clear</button>
         </div>
-
-        <!-- Movies table -->
         <div class="table-wrap">
             <table>
                 <thead>
@@ -506,11 +437,9 @@
         </div>
     </div>
 
-    <!-- ==================== TAB 2: My Watchlist ==================== -->
     <div id="tab-watchlist" class="panel">
         <div class="section-title">My Watchlist</div>
         <div class="section-subtitle">Track movies you've watched, are currently watching, or plan to watch.</div>
-
         <div class="table-wrap">
             <table>
                 <thead>
@@ -533,11 +462,9 @@
         </div>
     </div>
 
-    <!-- ==================== TAB 3: Add a Movie ==================== -->
     <div id="tab-add-movie" class="panel">
         <div class="section-title">Add New Movie</div>
         <div class="section-subtitle">Add a movie to the database so users can track it.</div>
-
         <div class="form-card">
             <h3>Movie Details</h3>
             <div class="form-grid">
@@ -580,11 +507,9 @@
         </div>
     </div>
 
-    <!-- ==================== TAB 4: Add to Watchlist ==================== -->
     <div id="tab-add-watchlist" class="panel">
         <div class="section-title">Add to Watchlist</div>
         <div class="section-subtitle">Add a movie to the current user's watchlist with a status and optional rating.</div>
-
         <div class="form-card">
             <h3>Watchlist Entry</h3>
             <div class="form-grid">
@@ -624,9 +549,6 @@
 
 </main>
 
-<!-- ============================================
-     EDIT MODAL (for updating watchlist entries)
-============================================ -->
 <div class="modal-overlay" id="editModal">
     <div class="modal">
         <h3>Edit Watchlist Entry</h3>
@@ -661,63 +583,35 @@
     </div>
 </div>
 
-<!-- Toast notification container -->
 <div id="toast-container"></div>
 
-
-<!-- ============================================
-     JAVASCRIPT
-============================================ -->
 <script>
-    // Base URL for all API calls
     const API = 'http://localhost:3000/api';
-
-    // Track the currently selected user ID
     let currentUserId = null;
 
-    // ============================================
-    // INITIALIZATION: Load data when page opens
-    // ============================================
     document.addEventListener('DOMContentLoaded', () => {
         loadUsers();
         loadAllMovies();
         loadPlatforms();
 
-        // Load watchlist when user is changed
         document.getElementById('userSelect').addEventListener('change', (e) => {
             currentUserId = e.target.value;
-            if (currentUserId) {
-                loadWatchlist(currentUserId);
-            }
+            if (currentUserId) loadWatchlist(currentUserId);
         });
 
-        // Allow pressing Enter to search
         document.getElementById('searchInput').addEventListener('keydown', (e) => {
             if (e.key === 'Enter') searchMovies();
         });
     });
 
-    // ============================================
-    // TAB SWITCHING
-    // ============================================
     function showTab(tabName) {
-        // Hide all panels and deactivate all tab buttons
         document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-
-        // Show selected panel and mark its button as active
         document.getElementById('tab-' + tabName).classList.add('active');
         event.target.classList.add('active');
-
-        // If user switches to watchlist tab, auto-reload it
-        if (tabName === 'watchlist' && currentUserId) {
-            loadWatchlist(currentUserId);
-        }
+        if (tabName === 'watchlist' && currentUserId) loadWatchlist(currentUserId);
     }
 
-    // ============================================
-    // LOAD USERS (populates header dropdown)
-    // ============================================
     async function loadUsers() {
         try {
             const res = await fetch(`${API}/users`);
@@ -730,17 +624,12 @@
                 opt.textContent = u.name;
                 select.appendChild(opt);
             });
-
-            // Also populate the watchlist movie dropdown select
             loadMoviesForDropdown();
         } catch (err) {
             showToast('Could not load users. Is the server running?', true);
         }
     }
 
-    // ============================================
-    // LOAD ALL MOVIES (for Browse tab)
-    // ============================================
     async function loadAllMovies() {
         document.getElementById('searchInput').value = '';
         setTableLoading('moviesTableBody', 6);
@@ -755,13 +644,9 @@
         }
     }
 
-    // ============================================
-    // SEARCH MOVIES
-    // ============================================
     async function searchMovies() {
         const query = document.getElementById('searchInput').value.trim();
         if (!query) { loadAllMovies(); return; }
-
         setTableLoading('moviesTableBody', 6);
         try {
             const res = await fetch(`${API}/movies/search?q=${encodeURIComponent(query)}`);
@@ -772,14 +657,10 @@
         }
     }
 
-    // ============================================
-    // RENDER MOVIES TABLE
-    // ============================================
     function renderMoviesTable(movies) {
         const tbody = document.getElementById('moviesTableBody');
         if (movies.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="6" class="empty-state">
-                <div class="icon">🎬</div>No movies found</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="6" class="empty-state"><div class="icon">🎬</div>No movies found</td></tr>`;
             return;
         }
         tbody.innerHTML = movies.map((m, i) => `
@@ -794,9 +675,6 @@
         `).join('');
     }
 
-    // ============================================
-    // LOAD WATCHLIST for a specific user
-    // ============================================
     async function loadWatchlist(userId) {
         setTableLoading('watchlistTableBody', 7);
         try {
@@ -808,14 +686,10 @@
         }
     }
 
-    // ============================================
-    // RENDER WATCHLIST TABLE
-    // ============================================
     function renderWatchlistTable(entries) {
         const tbody = document.getElementById('watchlistTableBody');
         if (entries.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="7" class="empty-state">
-                <div class="icon">📋</div>No movies in watchlist yet</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="7" class="empty-state"><div class="icon">📋</div>No movies in watchlist yet</td></tr>`;
             return;
         }
         tbody.innerHTML = entries.map(e => `
@@ -834,42 +708,26 @@
         `).join('');
     }
 
-    // ============================================
-    // ADD A NEW MOVIE (POST)
-    // ============================================
     async function addMovie() {
         const title    = document.getElementById('movieTitle').value.trim();
         const genre    = document.getElementById('movieGenre').value;
         const year     = document.getElementById('movieYear').value;
         const director = document.getElementById('movieDirector').value.trim();
         const platform = document.getElementById('moviePlatform').value;
-
         if (!title) { showToast('Title is required!', true); return; }
-
         try {
             const res = await fetch(`${API}/movies`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    title,
-                    genre: genre || null,
-                    release_year: year || null,
-                    director: director || null,
-                    platform_id: platform || null
-                })
+                body: JSON.stringify({ title, genre: genre || null, release_year: year || null, director: director || null, platform_id: platform || null })
             });
-
             if (!res.ok) throw new Error('Server error');
-
             showToast(`"${title}" added to database!`);
-            // Clear the form fields
             document.getElementById('movieTitle').value = '';
             document.getElementById('movieGenre').value = '';
             document.getElementById('movieYear').value = '';
             document.getElementById('movieDirector').value = '';
             document.getElementById('moviePlatform').value = '';
-
-            // Refresh movies list and dropdown
             loadAllMovies();
             loadMoviesForDropdown();
         } catch (err) {
@@ -877,35 +735,20 @@
         }
     }
 
-    // ============================================
-    // ADD TO WATCHLIST (POST)
-    // ============================================
     async function addToWatchlist() {
-        if (!currentUserId) {
-            showToast('Please select a user first!', true); return;
-        }
+        if (!currentUserId) { showToast('Please select a user first!', true); return; }
         const movieId = document.getElementById('wlMovieSelect').value;
         const status  = document.getElementById('wlStatus').value;
         const rating  = document.getElementById('wlRating').value;
         const notes   = document.getElementById('wlNotes').value.trim();
-
         if (!movieId) { showToast('Please select a movie!', true); return; }
-
         try {
             const res = await fetch(`${API}/watchlist`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    user_id: currentUserId,
-                    movie_id: movieId,
-                    status,
-                    rating: rating || null,
-                    notes: notes || null
-                })
+                body: JSON.stringify({ user_id: currentUserId, movie_id: movieId, status, rating: rating || null, notes: notes || null })
             });
-
             if (!res.ok) throw new Error('Server error');
-
             showToast('Added to watchlist!');
             document.getElementById('wlNotes').value = '';
             document.getElementById('wlRating').value = '';
@@ -914,9 +757,6 @@
         }
     }
 
-    // ============================================
-    // EDIT MODAL: Open and populate with existing data
-    // ============================================
     function openEditModal(watchlistId, status, rating, notes) {
         document.getElementById('editWatchlistId').value = watchlistId;
         document.getElementById('editStatus').value = status;
@@ -929,59 +769,38 @@
         document.getElementById('editModal').classList.remove('open');
     }
 
-    // ============================================
-    // SAVE EDIT (PUT request)
-    // ============================================
     async function saveEdit() {
         const watchlistId = document.getElementById('editWatchlistId').value;
         const status      = document.getElementById('editStatus').value;
         const rating      = document.getElementById('editRating').value;
         const notes       = document.getElementById('editNotes').value.trim();
-
         try {
             const res = await fetch(`${API}/watchlist/${watchlistId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    status,
-                    rating: rating || null,
-                    notes: notes || null
-                })
+                body: JSON.stringify({ status, rating: rating || null, notes: notes || null })
             });
-
             if (!res.ok) throw new Error('Update failed');
-
             closeModal();
             showToast('Watchlist entry updated!');
-            loadWatchlist(currentUserId);  // Refresh the watchlist
+            loadWatchlist(currentUserId);
         } catch (err) {
             showToast('Failed to update entry.', true);
         }
     }
 
-    // ============================================
-    // DELETE watchlist entry (DELETE request)
-    // ============================================
     async function deleteEntry(watchlistId) {
         if (!confirm('Remove this movie from your watchlist?')) return;
-
         try {
-            const res = await fetch(`${API}/watchlist/${watchlistId}`, {
-                method: 'DELETE'
-            });
-
+            const res = await fetch(`${API}/watchlist/${watchlistId}`, { method: 'DELETE' });
             if (!res.ok) throw new Error('Delete failed');
-
             showToast('Entry removed!');
-            loadWatchlist(currentUserId);  // Refresh the watchlist
+            loadWatchlist(currentUserId);
         } catch (err) {
             showToast('Failed to delete entry.', true);
         }
     }
 
-    // ============================================
-    // HELPER: Load platforms into the Add Movie form
-    // ============================================
     async function loadPlatforms() {
         try {
             const res = await fetch(`${API}/platforms`);
@@ -999,9 +818,6 @@
         }
     }
 
-    // ============================================
-    // HELPER: Load movies into the Add to Watchlist form dropdown
-    // ============================================
     async function loadMoviesForDropdown() {
         try {
             const res = await fetch(`${API}/movies`);
@@ -1019,9 +835,6 @@
         }
     }
 
-    // ============================================
-    // HELPER: Show a loading spinner inside a table
-    // ============================================
     function setTableLoading(tbodyId, cols) {
         document.getElementById(tbodyId).innerHTML = `
             <tr><td colspan="${cols}" class="loading">
@@ -1029,9 +842,6 @@
             </td></tr>`;
     }
 
-    // ============================================
-    // HELPER: Render a status badge with appropriate color
-    // ============================================
     function statusBadge(status) {
         const map = {
             'watched':       ['badge-watched',  'Watched'],
@@ -1042,9 +852,6 @@
         return `<span class="badge ${cls}">${label}</span>`;
     }
 
-    // ============================================
-    // HELPER: Render star rating visually
-    // ============================================
     function renderStars(rating) {
         if (!rating) return `<span style="color:var(--muted)">—</span>`;
         const filled = '★'.repeat(rating);
@@ -1052,17 +859,12 @@
         return `<span class="stars">${filled}</span><span class="stars-empty">${empty}</span>`;
     }
 
-    // ============================================
-    // HELPER: Show a toast notification
-    // ============================================
     function showToast(message, isError = false) {
         const container = document.getElementById('toast-container');
         const toast = document.createElement('div');
         toast.className = 'toast' + (isError ? ' error' : '');
         toast.textContent = message;
         container.appendChild(toast);
-
-        // Auto-remove toast after 3 seconds
         setTimeout(() => toast.remove(), 3000);
     }
 </script>
